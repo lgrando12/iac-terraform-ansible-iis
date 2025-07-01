@@ -1,0 +1,17 @@
+---
+- name: Configurar servidor Windows com IIS
+  hosts: windows
+  tasks:
+    - name: Instalar o IIS
+      win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Reiniciar o servidor (se necessário)
+      win_reboot:
+        msg: "Reiniciando após instalação do IIS"
+        connect_timeout: 5
+        reboot_timeout: 600
+        pre_reboot_delay: 0
+        post_reboot_delay: 60
+        test_command: whoami

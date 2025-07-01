@@ -1,0 +1,13 @@
+---
+- name: Instala IIS no Windows
+  hosts: win
+  tasks:
+    - name: Instalar IIS
+      win_feature:
+        name: Web-Server
+        state: present
+
+    - name: Verificar se IIS está rodando
+      win_service:
+        name: W3SVC
+        state: started
